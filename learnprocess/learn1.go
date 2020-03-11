@@ -17,12 +17,14 @@ func main() {
 	http.HandleFunc("/hello", helloHandler)
 
 	//ListenAndServe第二个参数就是一个 Handler 函数
+	//Handler是一个接口，需要实现方法 ServeHTTP ，也就是说，只要传入任何实现了 ServerHTTP 接口的实例
 	//这里第二个参数传入 nil 可以想一下为什么
 	log.Fatal(http.ListenAndServe(":9999", nil))
 }
 
 func indexHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(w, "URL.Path = %q\n", req.URL.Path)
+
 }
 
 func helloHandler(w http.ResponseWriter, req *http.Request) {
